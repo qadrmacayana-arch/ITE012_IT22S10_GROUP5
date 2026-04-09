@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - SmartDrive™</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+        </div>
+        <span>SmartDrive<span style="font-size: 10px; margin-left: 2px; opacity: 0.7;">TM</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="rent-a-car.html" class="nav-link">Rent a Car</a>
+        <a href="aboutpage.html" class="nav-link">About</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+      <div class="nav-actions" id="auth-buttons"></div>
+    </div>
+  </header>
+
+  <main class="container py-10" style="max-width: 900px; padding-top: 2rem; padding-bottom: 5rem;">
+    <div class="settings-panel bg-card border rounded-2xl p-6">
+      <div class="settings-header">
+        <div class="profile-info">
+          <div class="profile-avatar" id="profile-avatar">?</div>
+          <div>
+            <h1 class="profile-name" id="profile-name">Your Name</h1>
+            <p class="profile-email" id="profile-email">your-email@example.com</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="page-description">Manage your personal information and security.</p>
+
+      <form id="settings-form" class="settings-form mt-6">
+        <div class="grid grid-cols-2 gap-6">
+          <div class="form-group">
+            <label class="form-label" for="settings-name">Full Name</label>
+            <input type="text" id="settings-name" class="form-input" value="" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="settings-nickname">Nick Name</label>
+            <input type="text" id="settings-nickname" class="form-input" placeholder="Your Nick Name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="settings-birthday">Birthday</label>
+            <input type="date" id="settings-birthday" class="form-input">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="settings-country">Country</label>
+            <input type="text" id="settings-country" class="form-input" placeholder="Country">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="settings-gender">Gender</label>
+            <select id="settings-gender" class="form-input">
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+              <option value="prefer_not_to_say">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="settings-timezone">Time Zone</label>
+            <input type="text" id="settings-timezone" class="form-input" placeholder="GMT+8">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="settings-address">Complete Address</label>
+          <input type="text" id="settings-address" class="form-input" placeholder="Street, City, Province">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="settings-email">Email Address</label>
+          <input type="email" id="settings-email" class="form-input" value="" required>
+        </div>
+
+        <hr class="border-t border-border my-8">
+
+        <h2 class="section-title">Security</h2>
+        <div class="grid grid-cols-2 gap-6">
+          <div class="form-group">
+            <label class="form-label" for="settings-password">New Password</label>
+            <input type="password" id="settings-password" class="form-input" placeholder="••••••••">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="settings-confirm">Confirm New Password</label>
+            <input type="password" id="settings-confirm" class="form-input" placeholder="••••••••">
+          </div>
+        </div>
+
+        <div id="settings-message" style="display:none; margin-bottom:1rem; padding:1rem; border-radius:0.5rem; text-align:center; font-weight:500;"></div>
+
+        <button type="submit" class="btn-submit" style="width:100%; margin-top:1rem;">Save Changes</button>
+
+        <section class="danger-zone" style="margin-top:2rem; padding:1.25rem; border:1px solid rgba(220, 38, 38, 0.25); border-radius:1rem; background:rgba(254, 226, 226, 0.25);">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem;">
+            <div>
+              <h2 style="margin:0; color:#DC2626; font-size:1.1rem; text-shadow: 0 0 5px #DC2626, 0 0 10px #DC2626, 0 0 15px #DC2626;">Danger Zone</h2>
+              <p style="margin:0.25rem 0 0; color:white; font-size:0.9rem;">Critical account actions. Proceed with caution.</p>
+            </div>
+            <span style="color:#991B1B; font-weight:700; background:#FECACA; padding:0.25rem 0.6rem; border-radius:0.5rem; font-size:0.8rem;">Critical</span>
+          </div>
+
+          <div class="account-actions" style="display:flex; gap:0.75rem; flex-wrap:wrap; justify-content:flex-start;">
+            <button type="button" id="deactivate-account-btn" class="btn-secondary" style="background:#FBBF24; color:#1F2937; border:none; padding:0.8rem 1rem; border-radius:0.75rem; min-width:180px;">Deactivate Account</button>
+            <button type="button" id="delete-account-btn" class="btn-danger" style="background:#DC2626; color:#fff; border:none; padding:0.8rem 1rem; border-radius:0.75rem; min-width:180px;">Delete Account</button>
+          </div>
+
+          <p style="margin-top:1rem; font-size:0.85rem; color:white;">Deactivated accounts remain recoverable for 7 days. Deleted accounts are permanently removed.</p>
+        </section>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 class="footer-title">About SmartDrive™</h3>
+        <p class="footer-text">Premium car rental service providing luxury vehicles for your journey. Experience the future of mobility with our electric and premium fleet.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="rent-a-car.html">Rent a Car</a>
+          <a href="aboutpage.html">About Us</a>
+          <a href="dashboard.html">Dashboard</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Support</h3>
+        <div class="footer-links">
+          <a href="aboutpage.html#contact-us">Contact Us</a>
+          <a href="#" class="legal-link" data-content="terms">Terms & Conditions</a>
+          <a href="#" class="legal-link" data-content="privacy">Privacy Policy</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Company</h3>
+        <div class="footer-links">
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Partners</a>
+          <a href="#">Fleet</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 SmartDrive™. All rights reserved. | Revolutionizing Premium Car Rentals</p>
+    </div>
+  </footer>
+  <!-- Legal Modal -->
+  <div id="legal-modal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 800px;">
+      <div class="modal-header">
+        <h2 id="legal-modal-title"></h2>
+        <span class="close-btn" id="close-legal-modal">&times;</span>
+      </div>
+      <div class="modal-body" id="legal-modal-body" style="max-height: 70vh; overflow-y: auto;">
+        <!-- Content will be injected by JavaScript -->
+      </div>
+      <div class="modal-footer">
+        <p style="font-size: 0.8rem; color: var(--muted);">Last Updated: March 15, 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Deactivate/Delete Confirmation Modal -->
+  <div id="account-action-modal" class="modal" style="display:none;">
+    <div class="modal-content" style="max-width: 500px;">
+      <div class="modal-header">
+        <h2 id="account-action-modal-title">Confirm Action</h2>
+        <span class="close-btn" id="close-account-action-modal">&times;</span>
+      </div>
+      <div class="modal-body" id="account-action-modal-body" style="margin-bottom:1rem;">Are you sure?</div>
+      <div class="modal-footer" style="display:flex; gap:0.75rem; justify-content:flex-end;">
+        <button id="account-action-cancel-btn" class="btn-secondary" style="background:#E5E7EB;color:#111;border:none;padding:0.6rem 1rem;border-radius:0.5rem;">No</button>
+        <button id="account-action-confirm-btn" class="btn-danger" style="background:#DC2626;color:#fff;border:none;padding:0.6rem 1rem;border-radius:0.5rem;">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    // --- Legal Modal Logic ---
+    const legalModal = document.getElementById('legal-modal');
+    const closeLegalModalBtn = document.getElementById('close-legal-modal');
+    const legalModalTitle = document.getElementById('legal-modal-title');
+    const legalModalBody = document.getElementById('legal-modal-body');
+
+    const legalContent = {
+      terms: {
+        title: 'Terms and Conditions',
+        content: `
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1. Rental Agreement</h4>
+          <p>This agreement is between SmartDrive™ ('the Company') and the renter. By renting a vehicle, the renter agrees to all terms and conditions. The renter must be at least 21 years old and possess a valid driver's license recognized in the Philippines.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2. Vehicle Use</h4>
+          <p>The vehicle shall not be used for any illegal purpose, for racing, or outside the designated geographical limits without prior consent. The renter is responsible for all traffic violations and fines incurred during the rental period.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3. Payment and Charges</h4>
+          <p>All rental charges are to be paid in Philippine Peso (PHP). A security deposit is required upon vehicle pick-up. The final rental cost will include the daily rate, insurance, and any additional services availed. Late returns will be charged at 1.5x the daily rate.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">4. Insurance and Liability</h4>
+          <p>All vehicles are covered by Comprehensive Insurance as mandated by Philippine law. In case of an accident, the renter is liable for a participation fee. The renter is responsible for any damage not covered by the insurance.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">5. Governing Law</h4>
+          <p>This agreement shall be governed by the laws of the Republic of the Philippines. Any disputes shall be settled in the courts of Quezon City, Philippines.</p>
+        `
+      },
+      privacy: {
+        title: 'Privacy Policy',
+        content: `
+          <p>This Privacy Policy is in compliance with the Republic Act No. 10173, also known as the Data Privacy Act of 2012 of the Philippines.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">1. Information We Collect</h4>
+          <p>We collect personal information such as your name, email address, contact number, birthday, address, and driver's license details upon registration and booking. We also collect non-personal data like browsing behavior to improve our services.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">2. Use of Information</h4>
+          <p>Your data is used to process bookings, facilitate payments, communicate with you, and improve our platform. We may use your information for marketing purposes, from which you can opt-out at any time.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">3. Data Sharing and Security</h4>
+          <p>We do not sell your personal data. We may share your information with trusted third-party partners (e.g., payment gateways) only for the purpose of providing our services. We implement robust security measures to protect your data from unauthorized access.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">4. Your Rights as a Data Subject</h4>
+          <p>Under the Data Privacy Act of 2012, you have the right to access, correct, and erase your personal data. For any inquiries or to exercise your rights, please contact our Data Protection Officer at <a href="mailto:dpo@smartdrive.com" style="color: var(--primary);">dpo@smartdrive.com</a>.</p>
+          <h4 style="color: var(--primary); margin-top: 1rem; margin-bottom: 0.5rem;">5. Contact Information</h4>
+          <p>For any privacy-related concerns, you may contact us at our office located near the Technological Institute of the Philippines, Quezon City, or via email.</p>
+        `
+      }
+    };
+
+    function openLegalModal(type) {
+      if (legalContent[type]) {
+        legalModalTitle.textContent = legalContent[type].title;
+        legalModalBody.innerHTML = legalContent[type].content;
+        legalModal.style.display = 'flex';
+      }
+    }
+
+    document.querySelectorAll('.legal-link').forEach(link => {
+      link.addEventListener('click', function(e) { e.preventDefault(); openLegalModal(this.getAttribute('data-content')); });
+    });
+
+    closeLegalModalBtn.addEventListener('click', () => { legalModal.style.display = 'none'; });
+    window.addEventListener('click', (event) => { if (event.target === legalModal) { legalModal.style.display = 'none'; } });
+
+    function updateAuthButtons() {
+      const user = JSON.parse(sessionStorage.getItem('user') || 'null');
+      const authButtons = document.getElementById('auth-buttons');
+
+      if (user) {
+        authButtons.innerHTML = `
+          <div class="flex items-center gap-4">
+            <span class="text-sm text-muted-foreground">${user.email}</span>
+            <button onclick="logout()" style="padding:0.625rem 1.25rem;border-radius:0.5rem;background:none;color:var(--primary);border:2px solid var(--primary);font-weight:600;cursor:pointer;">Logout</button>
+          </div>
+        `; 
+      } else {
+        authButtons.innerHTML = `
+          <a href="login.html" class="btn-login">Login</a>
+          <a href="signup.html" class="btn-signup">Sign Up</a>
+        `;
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('user');
+      window.location.href = 'index.html';
+    }
+
+    function showMessage(text, success=true) {
+      const msg = document.getElementById('settings-message');
+      msg.style.display = 'block';
+      msg.style.background = success ? 'rgba(74, 222, 128, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+      msg.style.border = success ? '1px solid rgba(74, 222, 128, 0.3)' : '1px solid rgba(239, 68, 68, 0.3)';
+      msg.style.color = success ? '#4ade80' : '#ef4444';
+      msg.textContent = text;
+      
+      msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      setTimeout(() => { 
+        msg.style.display='none'; 
+      }, 4000);
+    }
+
+    function openAccountActionModal(actionType) {
+      const modal = document.getElementById('account-action-modal');
+      const body = document.getElementById('account-action-modal-body');
+      const title = document.getElementById('account-action-modal-title');
+      const confirmBtn = document.getElementById('account-action-confirm-btn');
+
+      if (actionType === 'deactivate') {
+        title.textContent = 'Deactivate Account';
+        body.innerHTML = `Are you sure you want to deactivate your account? <strong>You can reactivate by logging in with the same credentials within 7 days</strong> before the account is deleted automatically.`;
+      } else {
+        title.textContent = 'Delete Account';
+        body.innerHTML = `Are you sure you want to permanently delete your account? This cannot be undone.`;
+      }
+
+      confirmBtn.dataset.actionType = actionType;
+      modal.style.display = 'flex';
+    }
+
+    function closeAccountActionModal() {
+      const modal = document.getElementById('account-action-modal');
+      modal.style.display = 'none';
+    }
+
+    async function submitAccountAction(actionType) {
+      const user = JSON.parse(sessionStorage.getItem('user') || 'null');
+      if (!user || !user.email) {
+        showMessage('No logged-in user found.', false);
+        closeAccountActionModal();
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('action', actionType === 'deactivate' ? 'deactivateAccount' : 'deleteAccount');
+      formData.append('email', user.email);
+
+      // NOTE: This is a server-side action and will not work in a static HTML file.
+      // The logic is kept for reference, but it will fail.
+      showMessage('This is a server-side feature and is disabled in the static version.', false);
+      closeAccountActionModal();
+      return;
+      try {
+        const response = await fetch('settings.php', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          showMessage(result.message, true);
+          if (actionType === 'delete') {
+            sessionStorage.removeItem('user');
+            // In a static site, we can only clear local data.
+            setTimeout(() => window.location.href = 'index.html', 1500);
+          } else {
+            // For deactivate show instruction
+            showMessage('Account deactivated. Please login again to reactivate (within 7 days).', true);
+            setTimeout(() => {
+              sessionStorage.removeItem('user');
+              window.location.href = 'login.html';
+            }, 1500);
+          }
+        } else {
+          showMessage(result.message || 'Action failed.', false);
+        }
+      } catch (error) {
+        showMessage('Network error. Please try again.', false);
+      } finally {
+        closeAccountActionModal();
+      }
+    }
+
+    async function updateProfileToServer(profileData) {
+      // NOTE: This is a server-side action and will not work in a static HTML file.
+      // The logic is kept for reference, but it will fail.
+      showMessage('Profile saving is a server-side feature. Changes are saved locally for this session only.', true);
+      return true; // Simulate success for local changes.
+
+      const formData = new FormData();
+      formData.append('action', 'updateProfile');
+      formData.append('email', profileData.email);
+      formData.append('name', profileData.fullName);
+      formData.append('birthday', profileData.birthday || '');
+      formData.append('address', profileData.address || '');
+      formData.append('gender', profileData.gender || '');
+      if (profileData.password) {
+        formData.append('password', profileData.password);
+      }
+
+      try {
+        const response = await fetch('settings.php', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          return true;
+        }
+
+        showMessage(result.message || 'Unable to update profile on server.', false);
+        return false;
+      } catch (err) {
+        showMessage('Unable to connect to server. Please try again later.', false);
+        return false;
+      }
+    }
+
+    // --- Initialization ---
+    window.addEventListener('load', function() {
+      updateAuthButtons();
+      
+      // Load current user from session
+      const user = JSON.parse(sessionStorage.getItem('user') || 'null');
+      
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Populate profile header and form with existing data
+      const displayName = user.fullName || user.name || 'Your Name';
+      const displayEmail = user.email || 'your-email@example.com';
+      const initials = displayName.split(' ').map(n => n.charAt(0).toUpperCase()).slice(0, 2).join('') || 'U';
+
+      document.getElementById('profile-name').textContent = displayName;
+      document.getElementById('profile-email').textContent = displayEmail;
+      document.getElementById('profile-avatar').textContent = initials;
+
+      document.getElementById('settings-name').value = displayName;
+      document.getElementById('settings-email').value = displayEmail;
+      document.getElementById('settings-birthday').value = user.birthday || '';
+      document.getElementById('settings-address').value = user.address || '';
+      document.getElementById('settings-gender').value = user.gender || ''; 
+
+      // Handle form submission
+      document.getElementById('settings-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('settings-name').value.trim();
+        const email = document.getElementById('settings-email').value.trim();
+        const birthday = document.getElementById('settings-birthday').value;
+        const address = document.getElementById('settings-address').value.trim();
+        const gender = document.getElementById('settings-gender').value;
+        const pwd = document.getElementById('settings-password').value;
+        const confirm = document.getElementById('settings-confirm').value;
+
+        // Validation
+        if (!name || !email) {
+          showMessage('Name and email cannot be blank', false);
+          return;
+        }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          showMessage('Please enter a valid email address', false);
+          return;
+        }
+        
+        if (pwd && pwd.length < 6) {
+          showMessage('Password must be at least 6 characters', false);
+          return;
+        }
+        
+        if (pwd && pwd !== confirm) {
+          showMessage('Passwords do not match', false);
+          return;
+        }
+
+        // Update Permanent Storage (localStorage)
+        const users = JSON.parse(localStorage.getItem('users') || '[]');
+        // Find user by their original email (stored in the session)
+        const existingIndex = users.findIndex(u => u.email === user.email);
+        
+        if (existingIndex !== -1) {
+          users[existingIndex].name = name;
+          users[existingIndex].email = email;
+          users[existingIndex].birthday = birthday;
+          users[existingIndex].address = address;
+          users[existingIndex].gender = gender;
+          if (pwd) users[existingIndex].password = pwd;
+          
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Update Current Session (sessionStorage)
+        const updatedUser = {
+          ...user,
+          fullName: name,
+          email: email,
+          birthday: birthday,
+          address: address,
+          gender: gender
+        };
+        sessionStorage.setItem('user', JSON.stringify(updatedUser));
+
+        // Keep header in sync after save
+        const initials = name.split(' ').map(n => n.charAt(0).toUpperCase()).slice(0, 2).join('') || 'U';
+        document.getElementById('profile-name').textContent = name;
+        document.getElementById('profile-email').textContent = email;
+        document.getElementById('profile-avatar').textContent = initials;
+
+        // Update server profile
+        const updateResult = await updateProfileToServer({
+          email: user.email,
+          fullName: name,
+          birthday: birthday,
+          address: address,
+          gender: gender,
+          password: pwd
+        });
+
+        if (updateResult) {
+          showMessage('Settings saved successfully!');
+        }
+
+        // Optional: Refresh auth buttons to show new email if it changed
+        updateAuthButtons();
+      });
+
+      // Deactivate/Delete button bindings
+      document.getElementById('deactivate-account-btn').addEventListener('click', function() {
+        openAccountActionModal('deactivate');
+      });
+      document.getElementById('delete-account-btn').addEventListener('click', function() {
+        openAccountActionModal('delete');
+      });
+
+      document.getElementById('close-account-action-modal').addEventListener('click', closeAccountActionModal);
+      document.getElementById('account-action-cancel-btn').addEventListener('click', closeAccountActionModal);
+      document.getElementById('account-action-confirm-btn').addEventListener('click', function() {
+        const actionType = this.dataset.actionType;
+        if (actionType) {
+          submitAccountAction(actionType);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

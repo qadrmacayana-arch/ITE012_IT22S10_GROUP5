@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Details - SmartDrive™</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preload" href="data.js" as="script">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+        </div>
+        <span>SmartDrive<span style="font-size: 10px; margin-left: 2px; opacity: 0.7;">TM</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="rent-a-car.html" class="nav-link active">Rent a Car</a>
+        <a href="aboutpage.html" class="nav-link">About</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+      <div class="nav-actions" id="auth-buttons"></div>
+    </div>
+  </header>
+
+  <main class="container py-10">
+    <div id="vehicle-details-container" class="animate-fade-in">
+      <!-- Vehicle details will be loaded here -->
+    </div>
+    <div id="not-found-container" class="text-center py-20" style="display: none;">
+      <h1 class="text-2xl font-bold mb-4">Vehicle Not Found</h1>
+      <p class="text-muted-foreground mb-6">The vehicle you are looking for does not exist or has been removed.</p>
+      <a href="rent-a-car.html" class="btn-primary">Back to Fleet</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3 class="footer-title">About SmartDrive™</h3>
+        <p class="footer-text">Premium car rental service providing luxury vehicles for your journey. Experience the future of mobility with our electric and premium fleet.</p>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="rent-a-car.html">Rent a Car</a>
+          <a href="aboutpage.html">About Us</a>
+          <a href="dashboard.html">Dashboard</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Support</h3>
+        <div class="footer-links">
+          <a href="aboutpage.html#contact-us">Contact Us</a>
+          <a href="#" class="legal-link" data-content="terms">Terms & Conditions</a>
+          <a href="#" class="legal-link" data-content="privacy">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3 class="footer-title">Company</h3>
+        <div class="footer-links">
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Partners</a>
+          <a href="#">Fleet</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SmartDrive™. All rights reserved. | Revolutionizing Premium Car Rentals</p>
+    </div>
+  </footer>
+
+  <!-- Legal Modal -->
+  <div id="legal-modal" class="modal" style="display: none;">
+    <div class="modal-content" style="max-width: 800px;">
+      <div class="modal-header">
+        <h2 id="legal-modal-title"></h2>
+        <span class="close-btn" id="close-legal-modal">&times;</span>
+      </div>
+      <div class="modal-body" id="legal-modal-body" style="max-height: 70vh; overflow-y: auto;"></div>
+      <div class="modal-footer">
+        <p style="font-size: 0.8rem; color: var(--muted);">Last Updated: March 15, 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <script defer src="data.js"></script>
+  <script defer src="shared.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const params = new URLSearchParams(window.location.search);
+      const vehicleId = params.get('id');
+      const container = document.getElementById('vehicle-details-container');
+      const notFoundContainer = document.getElementById('not-found-container');
+
+      if (typeof CARS === 'undefined') {
+        console.error('CARS data not available.');
+        container.innerHTML = '<p>Error loading vehicle data.</p>';
+        return;
+      }
+
+      const car = CARS.find(c => c.id === vehicleId);
+
+      if (!car) {
+        container.style.display = 'none';
+        notFoundContainer.style.display = 'block';
+        return;
+      }
+
+      document.title = `${car.name} - SmartDrive™`;
+
+      const featuresHTML = car.features.map(feature => `
+        <li style="display: flex; align-items: center; gap: 0.75rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          ${feature}
+        </li>
+      `).join('');
+
+      const specsHTML = `
+        <div class="car-spec">
+          <div class="spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <span class="spec-label">${car.specs.seats} Seats</span>
+        </div>
+        <div class="car-spec">
+          <div class="spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <span class="spec-label">${car.specs.transmission}</span>
+        </div>
+        <div class="car-spec">
+          <div class="spec-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/></svg></div>
+          <span class="spec-label">${car.specs.fuel}</span>
+        </div>
+      `;
+
+      container.innerHTML = `
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; align-items: start;">
+          
+          <!-- Left Column: Image -->
+          <div class="glass-panel" style="padding: 1rem; border-radius: 1.5rem;">
+            <img src="${car.image}" alt="${car.name}" style="width: 100%; height: auto; object-fit: cover; border-radius: 1rem;">
+          </div>
+
+          <!-- Right Column: Details -->
+          <div style="display: flex; flex-direction: column; gap: 2rem;">
+            
+            <!-- Header -->
+            <div>
+              <div class="car-badge" style="margin-bottom: 1rem; display: inline-block;">${car.type}</div>
+              <h1 class="text-4xl font-extrabold tracking-tight text-white">${car.name}</h1>
+              <p class="text-muted-foreground mt-2 text-lg">${car.description}</p>
+            </div>
+
+            <!-- Specs -->
+            <div class="car-specs" style="border-radius: 1rem; padding: 1.5rem; background: rgba(255,255,255,0.03); border: 1px solid var(--border); margin: 0;">
+              ${specsHTML}
+            </div>
+
+            <!-- Features -->
+            <div class="glass-panel" style="padding: 1.5rem 2rem; border-radius: 1rem;">
+              <h3 class="text-lg font-bold mb-4">Key Features</h3>
+              <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; color: var(--muted-foreground);">
+                ${featuresHTML}
+              </ul>
+            </div>
+
+            <!-- Pricing & Booking -->
+            <div class="glass-panel" style="padding: 2rem; border-radius: 1.5rem; border: 2px solid var(--primary);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <span class="text-muted-foreground font-bold uppercase tracking-wider">Daily Rate</span>
+                <div class="car-price">
+                  <span class="price-currency text-2xl">₱</span>
+                  <span class="price-amount text-4xl">${car.price.toLocaleString()}</span>
+                </div>
+              </div>
+              <a href="calendar-selection.html?vehicle=${car.id}" class="btn-primary" style="width: 100%; text-align: center; text-decoration: none; font-size: 1rem; padding: 1.25rem;">
+                Book This Car
+              </a>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      updateAuthButtons();
+    });
+  </script>
+</body>
+</html>
